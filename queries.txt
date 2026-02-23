@@ -1,0 +1,19 @@
+1.Show customers who come from brazil or italy.
+SELECT * 
+FROM Customers
+WHERE Country='Italy' OR Country='Brazil';
+2.Display Customers who have the word ‘son’ in their CustomerName.
+SELECT * 
+FROM Customers
+WHERE CustomerName LIKE '%son%'; 
+3.Display orders made in the month of October 1996, display in asc order.
+SELECT * 
+FROM Orders
+WHERE OrderDate BETWEEN '1996-10-01'AND '1996-11-01'
+ORDER BY OrderDate;
+4.Find the total orders shipped by each of the 3 shippers.
+
+5.Display products whose price is above 25.
+SELECT * 
+FROM Products
+WHERE Price>25;
