@@ -9,8 +9,10 @@ WHERE CustomerName LIKE '%son%';
 3.Display orders made in the month of October 1996, display in asc order.
 SELECT * 
 FROM Orders
-WHERE OrderDate BETWEEN '1996-10-01'AND '1996-11-01'
+WHERE OrderDate BETWEEN '1996-10-01'AND '1996-10-31'
 ORDER BY OrderDate;
+
+
 4.Find the total orders shipped by each of the 3 shippers.
 
 5.Display products whose price is above 25.
