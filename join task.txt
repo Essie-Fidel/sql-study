@@ -1,0 +1,58 @@
+1.join customers,orders and shippers
+SELECT * FROM Customers
+INNER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+INNER JOIN Shippers ON Orders.ShipperID=Shippers.ShipperID;
+
+2.join products, suppliers and orderdetails
+SELECT * FROM Suppliers
+INNER JOIN Products ON Suppliers.SupplierID=Products.SupplierID
+INNER JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID;
+
+3.Join orderdetails,orders and shippers
+SELECT * FROM Shippers
+INNER JOIN Orders ON Shippers.ShipperID=Orders.ShipperID
+INNER JOIN OrderDetails ON Orders.OrderID=OrderDetails.OrderID;
+
+4.Join employees,orders and shippers
+SELECT * FROM Employees
+INNER JOIN Orders ON Employees.EmployeeID=Orders.EmployeeID
+INNER JOIN Shippers ON Orders.ShipperID=Shippers.ShipperID;
+
+5.Display name of customer and orderdate
+SELECT CustomerName,OrderDate
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID=Orders.CustomerID;
+
+6.Display orderid and product name
+SELECT OrderDetails.OrderID,Products.ProductName
+FROM OrderDetails
+INNER JOIN Products ON OrderDetails.ProductID=Products.ProductID;
+
+7.Display customername and product ordered
+SELECT  CustomerName,ProductName
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+INNER JOIN OrderDetails ON Orders.OrderID=OrderDetails.OrderID
+INNER JOIN Products ON OrderDetails.ProductID=Products.ProductID;
+
+8.Show employee who handled each order 
+SELECT Employees.FirstName,Orders.OrderID
+FROM Employees
+INNER JOIN Orders ON Employees.EmployeeID=Orders.EmployeeID;
+9.show productname and supplier name
+SELECT ProductName,SupplierName
+FROM Products
+INNER JOIN Suppliers ON Products.SupplierID=Suppliers.SupplierID;
+
+10.show customer name and shipper name
+SELECT CustomerName,ShipperName
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+INNER JOIN Shippers ON Orders.ShipperID=Shippers.ShipperID;
+
+11.show customers and employees who served them
+SELECT CustomerName,FirstName
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+INNER JOIN Employees ON Orders.EmployeeID=Employees.EmployeeID;
+

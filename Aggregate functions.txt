@@ -1,0 +1,11 @@
+1.count how many products belong in the dairy products category
+SELECT COUNT(*) FROM Products
+WHERE CategoryID=4;
+2.How many products were supplied by Exotic Liquid
+SELECT COUNT (*) FROM Products
+<<<<<<< HEAD
+WHERE SupplierID=1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+=======
+WHERE SupplierID=1;
+>>>>>>> c3c3a6e55b54ca70775284075f1d91a36bfaa274

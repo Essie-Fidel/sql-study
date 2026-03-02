@@ -1,0 +1,134 @@
+2.Display a single relation with: OrderId, OrderDate, CustomerName, City, Address, PostalCode, ShipperName, ProductName, Quantity.
+
+SELECT 
+    Orders.OrderId,
+    Orders.OrderDate,
+    Customers.CustomerName,
+    Customers.City,
+    Customers.Address,
+    Customers.PostalCode,
+    Shippers.ShipperName,
+    Products.ProductName,
+    OrderDetails.Quantity
+FROM Orders
+JOIN Customers 
+    ON Orders.CustomerId = Customers.CustomerId
+JOIN Shippers 
+    ON Orders.ShipperId = Shippers.ShipperId
+JOIN OrderDetails 
+    ON Orders.OrderId = OrderDetails.OrderId
+JOIN Products 
+    ON OrderDetails.ProductId = Products.ProductId;
+3.Display all products ever been ordered and display the shipper name.
+SELECT 
+Products.ProductID,
+Products.ProductName,
+Shippers.ShipperName
+FROM Products
+INNER JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID
+INNER JOIN Orders ON OrderDetails.OrderID=Orders.OrderID
+INNER JOIN Shippers ON Orders.ShipperID=Shippers.ShipperID;
+4.How many customers DO NOT have the words ‘son’ in their CustomerName.
+SELECT COUNT (*)
+FROM Customers
+WHERE CustomerName NOT LIKE '%son%';
+5.Display each customer_name and total_amount ever spent in the business, from highest amount.
+SELECT 
+Customers.CustomerID,SUM(OrderDetails.Quantity * Products.Price) AS Total_Amount
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+INNER JOIN OrderDetails ON Orders.OrderID=OrderDetails.OrderID
+INNER JOIN Products ON OrderDetails.ProductID=Products.ProductID
+GROUP BY Customers.CustomerID
+ORDER BY Total_Amount DESC;
+6. Find the total sales per day.
+SELECT Orders.OrderDate,SUM(OrderDetails.Quantity * Products.Price) AS Total_Sales
+FROM Orders
+INNER JOIN Orderdetails ON Orders.OrderID=OrderDetails.OrderID
+INNER JOIN Products ON OrderDetails.ProductID=Products.ProductID
+GROUP BY Orders.OrderDate;
+7. Find the total Sales for each Customer, the ones who have never ordered leave as 0.
+SELECT 
+    Customers.CustomerName,
+    SUM(OrderDetails.Quantity * Products.Price) AS Total_Sales
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+LEFT JOIN OrderDetails  ON Orders.OrderId = OrderDetails.OrderId
+LEFT JOIN Products ON OrderDetails.ProductId = Products.ProductId
+GROUP BY Customers.CustomerName;
+
+8.Find the total sales of each product.
+SELECT Products.ProductID,Products.ProductName,SUM(OrderDetails.Quantity * Products.Price) AS Total_Sales
+FROM Products
+INNER JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID
+INNER JOIN Orders ON OrderDetails.OrderID=Orders.OrderID
+GROUP BY Products.ProductID,Products.ProductName ;
+
+9.Find the total sales made in the year 1997
+SELECT SUM(OrderDetails.Quantity * Products.Price) AS Total_Sales
+FROM Orders
+JOIN OrderDetails ON Orders.OrderID=OrderDetails.OrderID
+JOIN Products on OrderDetails.ProductID=Products.ProductID 
+WHERE OrderDate LIKE '1997%';
+
+10.Show total quantity ordered per product
+SELECT Products.ProductName,SUM(OrderDetails.Quantity) AS Products_Ordered
+FROM Products
+JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID
+GROUP BY  Products.ProductName;
+
+11.Show total orders per customer
+SELECT Customers.CustomerName,COUNT(Orders.OrderID) AS Total_Orders
+FROM Customers
+JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+GROUP BY Customers.CustomerName;
+
+12.Show total sales amount per product
+SELECT Products.ProductName, SUM(OrderDetails.Quantity * Products.Price) AS Total_Sales
+FROM Products
+JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID
+GROUP BY Products.ProductName;
+
+13.Show category and total products in each category
+SELECT Categories.CategoryName, COUNT(Products.ProductID)AS Products_per_category 
+FROM Categories
+JOIN Products ON Categories.CategoryID=Products.CategoryID
+GROUP BY Categories.CategoryName;
+
+14.Top 5 customers by total purchase amount
+SELECT TOP 5 Customers.CustomerName, SUM(Products.Price) AS Total_Purchase
+FROM Customers
+JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+JOIN OrderDetails ON Orders.OrderID=OrderDetails.OrderID
+JOIN Products ON Products.ProductID=OrderDetails.ProductID
+GROUP BY Customers.CustomerName
+ORDER BY Total_Purchase DESC;
+
+15.Show employee and number of orders handled
+SELECT Employees.FirstName ,COUNT(Orders.OrderID)AS Orders_handled
+FROM Employees
+JOIN Orders ON Employees.EmployeeID=Orders.EmployeeID
+GROUP BY Employees.FirstName;
+
+16.Total revenue per category
+SELECT Categories.CategoryName,SUM(OrderDetails.Quantity * Products.Price) AS Total_Revenue
+FROM Categories
+JOIN Products ON Categories.CategoryID=Products.CategoryID
+JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID
+GROUP BY Categories.CategoryName;
+17.Most sold product (by quantity)
+SELECT TOP 1 Products.ProductName AS most_sold_product 
+FROM Products
+JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID
+ORDER BY OrderDetails.Quantity DESC;
+18.Employee who generated the highest sales
+SELECT TOP 1 Employees.FirstName, SUM(OrderDetails.Quantity * Products.Price) AS Total_Sales
+FROM Employees
+JOIN Orders ON Employees.EmployeeID=Orders.EmployeeID
+JOIN OrderDetails ON Orders.OrderID=OrderDetails.OrderID
+JOIN Products ON OrderDetails.ProductID=Products.ProductID
+GROUP BY Employees.FirstName 
+ORDER BY Total_Sales DESC;
+
+
+

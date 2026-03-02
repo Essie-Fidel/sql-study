@@ -1,0 +1,80 @@
+1.Display only customers and city
+SELECT CustomerName, City
+FROM Customers;
+2.Display unique countries from customers
+SELECT DISTINCT Country
+FROM Customers;
+3.display all products with their productname and price
+SELECT ProductName,Price 
+FROM Products;
+4.show all employees first name and lastname
+SELECT FirstName,LastName
+ FROM Employees;
+5.display all products with price >20 and <50
+SELECT * 
+FROM Products
+WHERE price>20 AND <50;
+6.Find employees born after 1960
+SELECT * FROM Employees
+WHERE BirthDate > '1960-12-31';
+7.Show customers from london OR Paris
+SELECT *
+FROM Customers
+WHERE City='London'OR City='Paris';
+8.Find customers not from USA
+SELECT * 
+FROM Customers
+WHERE NOT Country='USA';
+
+SELECT * 
+FROM Customers
+WHERE  Country!='USA';
+9.Display products ordered by price descending order
+SELECT * FROM Products
+ORDER BY Price DESC;
+10.sort customers by country then city
+SELECT * FROM Customers
+ORDER BY Country ,City;
+11.sort employees by birthdate and the firstname
+SELECT * 
+FROM Employees
+ORDER BY Birthdate,FirstName;
+12.show the two cheapest products
+SELECT TOP 2 *
+FROM Products
+ORDER BY Price;13.show the two expensive products
+SELECT TOP 2 *
+FROM Products
+ORDER BY Price DESC;
+14.Count customers in germany
+SELECT COUNT(*)
+FROM Customers
+WHERE Country='Germany';
+15.sum all product prices
+SELECT SUM(Price)
+FROM Products;
+16.find the average product price
+SELECT AVG(Price)
+FROM Products;
+17.count customers per country
+SELECT Country ,COUNT(*) AS number_of_customers
+FROM Customers
+GROUP BY Country
+;
+*IF TOLD TO DISPLAY FROM THE HIGHEST
+SELECT Country ,COUNT(CustomerID) AS number_of_customers
+FROM Customers
+GROUP BY Country
+ORDER BY COUNT(CustomerID)DESC;
+18.average product price per supplier
+SELECT SupplierID, AVG(Price)AS average_price
+FROM Products
+GROUP BY SupplierID;
+19.sum product prices  per category
+SELECT CategoryID, SUM(Price) AS Total_sum
+FROM Products
+GROUP BY CategoryID;
+20.find maximum price per category
+SELECT CategoryID,MAX(Price)AS maximum_price
+FROM Products
+GROUP BY CategoryID;

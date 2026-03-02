@@ -1,0 +1,17 @@
+1.Join students with results
+school_db=# SELECT *
+school_db-# FROM Student
+school_db-# JOIN Results ON Student.id=Results.student_id;
+2.join students with enrollments
+school_db=# SELECT *
+school_db-# FROM Student
+school_db-# JOIN Enrollments ON Student.id=Enrollments.student_id;
+3.join staff with courses
+school_db=# SELECT *
+school_db-# FROM Staff
+school_db-# JOIN Courses ON Staff.id=Courses.staff_id;
+4.join courses with enrollments
+school_db=# SELECT *
+school_db-# FROM Courses
+school_db-# JOIN Enrollments ON Courses.course_id=Enrollments.course_id;
+5.
